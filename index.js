@@ -22,6 +22,9 @@ app.get("/", function (req, res) {
 // your first API endpoint... 
 app.get("/api/:date", function (req, res) {
   const date = req.params.date;
+  if(!date) {
+    res.json({unix: Date.now().getTime(), utc: Date.now().toUTCString()})
+  }
   let converted_date;
   if(date.match(/^[0-9]+$/g)) converted_date = new Date(parseInt(date))
   else converted_date = new Date(date);
